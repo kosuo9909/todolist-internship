@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Input from './components/Input';
 import RenderItems from './components/RenderItems';
+import React from 'react';
 
 function App() {
   const [items, setItems] = useState(JSON.parse(localStorage.getItem("items")) || []);
@@ -31,7 +32,7 @@ function App() {
     const updatedItems = items.map((item) => {
       if (item === itemToBeFound) {
         if (item.quantity > 1) {
-          return {...item, quantity: item.quantity - 1 };
+          return { ...item, quantity: item.quantity - 1 };
 
         }
       }

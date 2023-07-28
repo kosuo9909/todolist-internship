@@ -7,10 +7,14 @@ const RenderItems = ({ items, increaseQuantityHandler,decreaseQuantityHandler })
     const sortedItems = [...items]
 
     if (sort === 'name') {
-        sortedItems.sort((a, b) => { return a.name.localeCompare(b.name) });
+        sortedItems.sort((a, b) =>  a.name.localeCompare(b.name));
     } else if (sort === 'price') {
         sortedItems.sort((a, b) => a.price - b.price)
     }
+
+    const sum = sortedItems.reduce((sum, item) => {
+        return sum + (item.price * item.quantity)
+    }, 0)
 
     return <div>
         <label htmlFor='cars'>Sort By</label>
@@ -23,8 +27,9 @@ const RenderItems = ({ items, increaseQuantityHandler,decreaseQuantityHandler })
             <p>Name: {item.name} Quantity: {item.quantity} Price: ${item.price} Total Price: ${item.quantity * item.price} 
             <button onClick={() => {increaseQuantityHandler(item)}}>Increase Quantity</button>
             {item.quantity > 1 && <button onClick={() => {decreaseQuantityHandler(item)}}>Decrease Quantity</button>}
-            </p>
+            </p> 
         </div>))}
+        <span>All items combined amount to ${sum}</span>
     </div>
 };
 
