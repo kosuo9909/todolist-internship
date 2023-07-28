@@ -16,6 +16,7 @@ const RenderItems = ({ items, increaseQuantityHandler,decreaseQuantityHandler })
         <select id='cars' onChange={(e) => setSort(e.target.value)}>
             <option value='name'>Name</option>
             <option value='price'>Price</option>
+            <option value='default'>Default</option>
         </select>
         {sortedItems.map((item, index) => (<div key={index} >
             <p>Name: {item.name} Quantity: {item.quantity} Price: ${item.price} Total Price: ${item.quantity * item.price} 
