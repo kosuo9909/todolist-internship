@@ -4,7 +4,7 @@ const Input = ({addItemHandler}) => {
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const addItemAndClearInput = ( ) => {
-        addItemHandler({name, price})
+        addItemHandler({name, price, quantity: 1})
         setName('')
         setPrice('')
     }

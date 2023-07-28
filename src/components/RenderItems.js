@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const RenderItems = ({ items }) => {
+const RenderItems = ({ items, increaseQuantityHandler,decreaseQuantityHandler }) => {
     const [sort, setSort] = useState('')
 
     const sortedItems = [...items]
@@ -17,7 +17,12 @@ const RenderItems = ({ items }) => {
             <option value='name'>Name</option>
             <option value='price'>Price</option>
         </select>
-        {sortedItems.map((item, index) => (<div key={index} ><p>Name: {item.name} Price: ${item.price}</p></div>))}
+        {sortedItems.map((item, index) => (<div key={index} >
+            <p>Name: {item.name} Quantity: {item.quantity} Price: ${item.price} Total Price: ${item.quantity * item.price} 
+            <button onClick={() => {increaseQuantityHandler(item)}}>Increase Quantity</button>
+            {item.quantity > 1 && <button onClick={() => {decreaseQuantityHandler(item)}}>Decrease Quantity</button>}
+            </p>
+        </div>))}
     </div>
 };
 

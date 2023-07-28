@@ -14,10 +14,37 @@ function App() {
     localStorage.setItem("items", JSON.stringify(items))
   }, [items])
 
+  const increaseQuantityHandler = (itemToBeFound) => {
+    const updatedItems = items.map(item => {
+
+      if (item === itemToBeFound) {
+        return { ...item, quantity: item.quantity + 1 };
+      }
+
+      return item;
+    });
+
+    setItems(updatedItems);
+  }
+
+  const decreaseQuantityHandler = (itemToBeFound) => {
+    const updatedItems = items.map((item) => {
+      if (item === itemToBeFound) {
+        if (item.quantity > 1) {
+          return {...item, quantity: item.quantity - 1 };
+
+        }
+      }
+      return item
+    })
+
+    setItems(updatedItems);
+  }
+
   return (
     <div className="App">
       <Input addItemHandler={addItemHandler} />
-      <RenderItems items={items}/>
+      <RenderItems items={items} increaseQuantityHandler={increaseQuantityHandler} decreaseQuantityHandler={decreaseQuantityHandler} />
     </div>
   );
 }
