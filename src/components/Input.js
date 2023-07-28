@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 
 const Input = ({ addItemHandler }) => {
     const [name, setName] = useState("");
