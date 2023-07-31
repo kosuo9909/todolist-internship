@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 
-const RenderItems = ({ items, increaseQuantityHandler,decreaseQuantityHandler }) => {
+const RenderItems = ({ items, increaseQuantityHandler,decreaseQuantityHandler, removeItemHandler }) => {
     const [sort, setSort] = useState('')
 
     const sortedItems = [...items]
@@ -27,6 +27,7 @@ const RenderItems = ({ items, increaseQuantityHandler,decreaseQuantityHandler })
             <p>Name: {item.name} Quantity: {item.quantity} Price: ${item.price} Total Price: ${item.quantity * item.price} 
             <button onClick={() => {increaseQuantityHandler(item)}}>Increase Quantity</button>
             {item.quantity > 1 && <button onClick={() => {decreaseQuantityHandler(item)}}>Decrease Quantity</button>}
+            <button onClick={() => {removeItemHandler(item)}}>Delete Item</button>
             </p> 
         </div>))}
         <span>All items combined amount to ${sum}</span>

@@ -21,7 +21,7 @@ function App() {
       if (item === itemToBeFound) {
         return { ...item, quantity: item.quantity + 1 };
       }
-
+      
       return item;
     });
 
@@ -42,10 +42,15 @@ function App() {
     setItems(updatedItems);
   }
 
+  const removeItemHandler = (itemToBeFound) => {
+    const updatedItems = items.filter((item) => item !== itemToBeFound)
+    setItems(updatedItems)
+  }
+
   return (
     <div className="App">
       <Input addItemHandler={addItemHandler} />
-      <RenderItems items={items} increaseQuantityHandler={increaseQuantityHandler} decreaseQuantityHandler={decreaseQuantityHandler} />
+      <RenderItems items={items} removeItemHandler={removeItemHandler} increaseQuantityHandler={increaseQuantityHandler} decreaseQuantityHandler={decreaseQuantityHandler} />
     </div>
   );
 }
