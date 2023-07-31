@@ -1,52 +1,83 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const useTodoList = (storageType) => {
-
-    const [items, setItems] = useState(JSON.parse(localStorage.getItem("items")) || []);
-
-    const addItemHandler = (newItem) => {
-        setItems(prevItems => [...prevItems, newItem]);
+  const createStorage = (type) => {
+    switch (type) {
+      case 'local':
+        return {
+          getItem: (key) => {
+            const storedValue = localStorage.getItem(key);
+            return storedValue ? JSON.parse(storedValue) : [];
+          },
+          setItem: (key, value) =>
+            localStorage.setItem(key, JSON.stringify(value)),
+        };
+      case 'session':
+        return {
+          getItem: (key) => {
+            const storedValue = sessionStorage.getItem(key);
+            return storedValue ? JSON.parse(storedValue) : [];
+          },
+          setItem: (key, value) =>
+            sessionStorage.setItem(key, JSON.stringify(value)),
+        };
+      case 'server':
+        break;
+      default:
+        throw new Error(`Unsupported storage type: ${type}`);
     }
+  };
 
-    useEffect(() => {
-        localStorage.setItem("items", JSON.stringify(items))
-    }, [items])
+  const storage = createStorage(storageType);
 
-    const increaseQuantityHandler = (itemToBeFound) => {
-        const updatedItems = items.map(item => {
+  const [items, setItems] = useState(storage.getItem('items') || []);
 
-            if (item === itemToBeFound) {
-                return { ...item, quantity: item.quantity + 1 };
-            }
+  const addItemHandler = (newItem) => {
+    setItems((prevItems) => [...prevItems, newItem]);
+  };
 
-            return item;
-        });
+  useEffect(() => {
+    storage.setItem('items', JSON.stringify(items));
+  }, [items]);
 
-        setItems(updatedItems);
-    }
+  const increaseQuantityHandler = (itemToBeFound) => {
+    const updatedItems = items.map((item) => {
+      if (item === itemToBeFound) {
+        return { ...item, quantity: item.quantity + 1 };
+      }
 
-    const decreaseQuantityHandler = (itemToBeFound) => {
-        const updatedItems = items.map((item) => {
-            if (item === itemToBeFound) {
-                if (item.quantity > 1) {
-                    return { ...item, quantity: item.quantity - 1 };
+      return item;
+    });
 
-                }
-            }
-            return item
-        })
+    setItems(updatedItems);
+  };
 
-        setItems(updatedItems);
-    }
+  const decreaseQuantityHandler = (itemToBeFound) => {
+    const updatedItems = items.map((item) => {
+      if (item === itemToBeFound) {
+        if (item.quantity > 1) {
+          return { ...item, quantity: item.quantity - 1 };
+        }
+      }
+      return item;
+    });
 
-    const removeItemHandler = (itemToBeFound) => {
-        const updatedItems = items.filter((item) => item !== itemToBeFound)
-        setItems(updatedItems)
-    }
+    setItems(updatedItems);
+  };
 
-    return { items, decreaseQuantityHandler, removeItemHandler, increaseQuantityHandler, addItemHandler };
+  const removeItemHandler = (itemToBeFound) => {
+    const updatedItems = items.filter((item) => item !== itemToBeFound);
+    setItems(updatedItems);
+  };
 
-}
+  return {
+    items,
+    decreaseQuantityHandler,
+    removeItemHandler,
+    increaseQuantityHandler,
+    addItemHandler,
+  };
+};
 
 export default useTodoList;
