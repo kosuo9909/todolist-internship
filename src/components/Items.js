@@ -39,7 +39,9 @@ const RenderItems = ({ items, increaseQuantityHandler, decreaseQuantityHandler, 
             removeItemHandler={removeItemHandler}
             decreaseQuantityHandler={decreaseQuantityHandler} />)}
         </div>
-        <div className="total-combined-price-wrap">All items combined amount to <span className="total-combined-price">${sum.toFixed(2)}</span> </div>
+        <div className="total-combined-price-wrap">All items combined amount to
+            <span className="total-combined-price">${sum.toFixed(2)}</span>
+        </div>
     </div>
 };
 

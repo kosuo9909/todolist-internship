@@ -5,12 +5,15 @@ import React from 'react';
 import useTodoList from './hooks/useTodoList';
 
 function App() {
-  const {items, decreaseQuantityHandler, removeItemHandler, increaseQuantityHandler, addItemHandler} = useTodoList()
+  const { items, decreaseQuantityHandler, removeItemHandler, increaseQuantityHandler, addItemHandler } = useTodoList()
 
   return (
     <div className="app-header">
       <Input addItemHandler={addItemHandler} />
-      <RenderItems items={items} removeItemHandler={removeItemHandler} increaseQuantityHandler={increaseQuantityHandler} decreaseQuantityHandler={decreaseQuantityHandler} />
+      <RenderItems items={items}
+        removeItemHandler={removeItemHandler}
+        increaseQuantityHandler={increaseQuantityHandler}
+        decreaseQuantityHandler={decreaseQuantityHandler} />
     </div>
   );
 }

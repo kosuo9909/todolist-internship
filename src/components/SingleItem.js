@@ -17,9 +17,15 @@ const SingleItem = ({ index, item, increaseQuantityHandler, removeItemHandler, d
                 Total Price:<span className="total-price-span"> ${(item.quantity * item.price).toFixed(2)}</span>
             </div>
             <div className="button-wrapper">
-                {!isItemCompleted && <button className="button-quantity" onClick={() => { increaseQuantityHandler(item) }}>Increase Quantity</button>}
-                {item.quantity > 1 && !isItemCompleted && <button className="button-quantity" onClick={() => { decreaseQuantityHandler(item) }}>Decrease Quantity</button>}
-                {isItemCompleted && <button className="button-quantity" onClick={() => { removeItemHandler(item) }}>Delete Item</button>}</div>
+                {!isItemCompleted &&
+                    <button className="button-quantity"
+                        onClick={() => { increaseQuantityHandler(item) }}>Increase Quantity</button>}
+                {item.quantity > 1 &&
+                    !isItemCompleted && <button className="button-quantity"
+                        onClick={() => { decreaseQuantityHandler(item) }}>Decrease Quantity</button>}
+                {isItemCompleted &&
+                    <button className="button-quantity"
+                        onClick={() => { removeItemHandler(item) }}>Delete Item</button>}</div>
         </div>
     </div>
 }
