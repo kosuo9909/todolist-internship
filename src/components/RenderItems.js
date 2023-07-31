@@ -24,13 +24,13 @@ const RenderItems = ({ items, increaseQuantityHandler, decreaseQuantityHandler, 
             <option value='default'>Default</option>
         </select>
         {sortedItems.map((item, index) => (<div key={index} >
-            <p>Name: {item.name} Quantity: {item.quantity} Price: ${item.price} Total Price: ${item.quantity * item.price}
+            <p>Name: {item.name} Quantity: {item.quantity} Price: ${item.price} Total Price: ${(item.quantity * item.price).toFixed(2)}
                 <button onClick={() => { increaseQuantityHandler(item) }}>Increase Quantity</button>
                 {item.quantity > 1 && <button onClick={() => { decreaseQuantityHandler(item) }}>Decrease Quantity</button>}
                 <button onClick={() => { removeItemHandler(item) }}>Delete Item</button>
             </p>
         </div>))}
-        <span>All items combined amount to ${sum}</span>
+        <span>All items combined amount to ${sum.toFixed(2)}</span>
     </div>
 };
 
