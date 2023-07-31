@@ -1,5 +1,6 @@
 import { useState } from "react";
 import React from "react";
+import './Input.css'
 
 const Input = ({ addItemHandler }) => {
     const [name, setName] = useState("");
@@ -13,7 +14,7 @@ const Input = ({ addItemHandler }) => {
         setName('')
         setPrice('')
     }
-    return <div>
+    return <div className="input-header">
         <input value={name} placeholder="Item Name" onKeyDown={handleEnterAddItem} onChange={(e) => { setName(e.target.value) }}></input>
         <input value={price} placeholder="Item Price" onKeyDown={handleEnterAddItem} onChange={(e) => { setPrice(e.target.value) }}></input>
         <button onClick={addItemAndClearInput}>Add Item</button>
