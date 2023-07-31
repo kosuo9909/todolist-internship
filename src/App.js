@@ -21,7 +21,7 @@ function App() {
       if (item === itemToBeFound) {
         return { ...item, quantity: item.quantity + 1 };
       }
-      
+
       return item;
     });
 

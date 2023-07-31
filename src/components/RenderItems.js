@@ -1,13 +1,13 @@
 import { useState } from "react";
 import React from "react";
 
-const RenderItems = ({ items, increaseQuantityHandler,decreaseQuantityHandler, removeItemHandler }) => {
+const RenderItems = ({ items, increaseQuantityHandler, decreaseQuantityHandler, removeItemHandler }) => {
     const [sort, setSort] = useState('')
 
     const sortedItems = [...items]
 
     if (sort === 'name') {
-        sortedItems.sort((a, b) =>  a.name.localeCompare(b.name));
+        sortedItems.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sort === 'price') {
         sortedItems.sort((a, b) => a.price - b.price)
     }
@@ -24,11 +24,11 @@ const RenderItems = ({ items, increaseQuantityHandler,decreaseQuantityHandler, r
             <option value='default'>Default</option>
         </select>
         {sortedItems.map((item, index) => (<div key={index} >
-            <p>Name: {item.name} Quantity: {item.quantity} Price: ${item.price} Total Price: ${item.quantity * item.price} 
-            <button onClick={() => {increaseQuantityHandler(item)}}>Increase Quantity</button>
-            {item.quantity > 1 && <button onClick={() => {decreaseQuantityHandler(item)}}>Decrease Quantity</button>}
-            <button onClick={() => {removeItemHandler(item)}}>Delete Item</button>
-            </p> 
+            <p>Name: {item.name} Quantity: {item.quantity} Price: ${item.price} Total Price: ${item.quantity * item.price}
+                <button onClick={() => { increaseQuantityHandler(item) }}>Increase Quantity</button>
+                {item.quantity > 1 && <button onClick={() => { decreaseQuantityHandler(item) }}>Decrease Quantity</button>}
+                <button onClick={() => { removeItemHandler(item) }}>Delete Item</button>
+            </p>
         </div>))}
         <span>All items combined amount to ${sum}</span>
     </div>
