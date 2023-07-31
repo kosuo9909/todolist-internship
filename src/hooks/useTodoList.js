@@ -44,8 +44,6 @@ const useTodoList = () => {
         setItems(updatedItems)
     }
 
-
-
     return { items, decreaseQuantityHandler, removeItemHandler, increaseQuantityHandler, addItemHandler };
 
 }

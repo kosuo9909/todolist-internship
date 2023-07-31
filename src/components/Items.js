@@ -6,7 +6,6 @@ import SingleItem from "./SingleItem";
 
 const RenderItems = ({ items, increaseQuantityHandler, decreaseQuantityHandler, removeItemHandler }) => {
     const [sort, setSort] = useState('')
-    const [isItemCompleted, setIsItemCompleted] = useState(false)
 
     const sortedItems = [...items]
     //TODO: funkciq sus switch statement
