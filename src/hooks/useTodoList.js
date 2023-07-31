@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 
-const useTodoList = () => {
+const useTodoList = (storageType) => {
 
     const [items, setItems] = useState(JSON.parse(localStorage.getItem("items")) || []);
 

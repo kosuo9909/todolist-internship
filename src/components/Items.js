@@ -7,13 +7,20 @@ import SingleItem from "./SingleItem";
 const RenderItems = ({ items, increaseQuantityHandler, decreaseQuantityHandler, removeItemHandler }) => {
     const [sort, setSort] = useState('')
 
-    const sortedItems = [...items]
-    //TODO: funkciq sus switch statement
-    if (sort === 'name') {
-        sortedItems.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sort === 'price') {
-        sortedItems.sort((a, b) => a.price - b.price)
+    const sortType = (desiredType) => {
+        const sortedItems = [...items]
+        switch (desiredType) {
+            case "name":
+                sortedItems.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            case "price":
+                sortedItems.sort((a, b) => a.price - b.price)
+                break
+        }
+        return sortedItems;
     }
+
+    const sortedItems = sortType(sort);
 
     const sum = sortedItems.reduce((sum, item) => {
         return sum + (item.price * item.quantity)
@@ -28,9 +35,9 @@ const RenderItems = ({ items, increaseQuantityHandler, decreaseQuantityHandler, 
             </select>
         </label>
         <div className="items">{sortedItems.map((item, index) => <SingleItem key={index} item={item}
-         increaseQuantityHandler={increaseQuantityHandler} 
-         removeItemHandler={removeItemHandler}
-         decreaseQuantityHandler={decreaseQuantityHandler}/>)}
+            increaseQuantityHandler={increaseQuantityHandler}
+            removeItemHandler={removeItemHandler}
+            decreaseQuantityHandler={decreaseQuantityHandler} />)}
         </div>
         <div className="total-combined-price-wrap">All items combined amount to <span className="total-combined-price">${sum.toFixed(2)}</span> </div>
     </div>
