@@ -25,7 +25,10 @@ const SingleItem = ({ index, item, increaseQuantityHandler, removeItemHandler, d
                         onClick={() => { decreaseQuantityHandler(item) }}>Decrease Quantity</button>}
                 {isItemCompleted &&
                     <button className="button-quantity"
-                        onClick={() => { removeItemHandler(item) }}>Delete Item</button>}</div>
+                        onClick={() => {
+                            removeItemHandler(item)
+                            setIsItemCompleted(false)
+                        }}>Delete Item</button>}</div>
         </div>
     </div>
 }
