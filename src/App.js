@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Input from './components/Input';
-import RenderItems from './components/RenderItems';
+import RenderItems from './components/Items';
 import React from 'react';
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="app-header">
       <Input addItemHandler={addItemHandler} />
       <RenderItems items={items} removeItemHandler={removeItemHandler} increaseQuantityHandler={increaseQuantityHandler} decreaseQuantityHandler={decreaseQuantityHandler} />
     </div>
