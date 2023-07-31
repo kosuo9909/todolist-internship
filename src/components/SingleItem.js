@@ -6,8 +6,9 @@ const SingleItem = ({ index, item, increaseQuantityHandler, removeItemHandler, d
 
     return <div key={index} >
         <label className="checkbox">
-            <input onClick={() => setIsItemCompleted(prevIsItemCompleted => !isItemCompleted)} type="checkbox"></input>
-            <span >Mark as done</span>
+            <input onClick={() => setIsItemCompleted(prevIsItemCompleted => !isItemCompleted)} type="checkbox"
+                checked={isItemCompleted}></input>
+            <span>Mark as done</span>
         </label>
         <div className="items-row">
             <div className={`items-entries ${isItemCompleted && 'line-through'}`}>
@@ -28,7 +29,8 @@ const SingleItem = ({ index, item, increaseQuantityHandler, removeItemHandler, d
                         onClick={() => {
                             removeItemHandler(item)
                             setIsItemCompleted(false)
-                        }}>Delete Item</button>}</div>
+                        }}>
+                        Delete Item</button>}</div>
         </div>
     </div>
 }
