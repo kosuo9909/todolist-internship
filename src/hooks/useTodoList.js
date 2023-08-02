@@ -38,7 +38,7 @@ const useTodoList = (storageType) => {
   };
 
   useEffect(() => {
-    storage.setItem('items', JSON.stringify(items));
+    storage.setItem('items', items);
   }, [items]);
 
   const increaseQuantityHandler = (itemToBeFound) => {
