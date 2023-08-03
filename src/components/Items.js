@@ -47,6 +47,7 @@ const Items = ({
             key={item.id}
             keyv2={item.id}
             item={item}
+            data-testid={`item-${item.id}`}
             increaseQuantityHandler={increaseQuantityHandler}
             removeItemHandler={removeItemHandler}
             decreaseQuantityHandler={decreaseQuantityHandler}

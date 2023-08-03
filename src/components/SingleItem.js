@@ -11,7 +11,7 @@ const SingleItem = ({
   const [isItemCompleted, setIsItemCompleted] = useState(false);
 
   return (
-    <div key={keyv2}>
+    <div data-testid={`item-${item.id}`} key={keyv2}>
       <label className='checkbox'>
         <input
           onClick={() =>
