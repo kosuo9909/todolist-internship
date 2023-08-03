@@ -2,6 +2,7 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 import Items from './Items';
+import { parse } from 'uuid';
 
 // jest.mock('./SingleItem.js', () => ({
 //     __esModule: true,
@@ -46,10 +47,8 @@ describe('Items.js component', () => {
     expect(itemElements[0]).toHaveTextContent('Item 1');
     expect(itemElements[1]).toHaveTextContent('Item 2');
     expect(itemElements[2]).toHaveTextContent('Item 3');
-    
-
   });
-  it('sorts items by Price', async() => {
+  it('sorts items by Price', async () => {
     const { getAllByTestId, getByLabelText } = render(
       <Items
         items={mockItems}
@@ -61,15 +60,38 @@ describe('Items.js component', () => {
 
     fireEvent.change(getByLabelText('Sort By'), { target: { value: 'price' } });
     await waitFor(() => {
+      const itemElements = getAllByTestId(/item-/);
 
-
-        const itemElements = getAllByTestId(/item-/);
-        
-        expect(itemElements[0].querySelector('.name-span').textContent.trim()).toEqual('Item 3');
-        expect(itemElements[1].querySelector('.name-span').textContent.trim()).toEqual('Item 1');
-        expect(itemElements[2].querySelector('.name-span').textContent.trim()).toEqual('Item 2');
-        
+      expect(
+        itemElements[0].querySelector('.name-span').textContent.trim()
+      ).toEqual('Item 3');
+      expect(
+        itemElements[1].querySelector('.name-span').textContent.trim()
+      ).toEqual('Item 1');
+      expect(
+        itemElements[2].querySelector('.name-span').textContent.trim()
+      ).toEqual('Item 2');
     });
-    
+  });
+
+  it('sums all item prices correctly', () => {
+    render(
+      <Items
+        items={mockItems}
+        increaseQuantityHandler={mockIncreaseQuantityHandler}
+        decreaseQuantityHandler={mockDecreaseQuantityHandler}
+        removeItemHandler={mockRemoveItemHandler}
+      />
+    );
+
+    const sum = mockItems.reduce((sum, item) => {
+      return sum + item.price * item.quantity;
+    }, 0);
+    const sumFromComponent = (
+      document.querySelector('.total-combined-price').textContent
+    );
+
+    const match = sumFromComponent.match(/\d+\.\d{2}/);
+    expect(parseFloat(match)).toEqual(sum);
   });
 });
