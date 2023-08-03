@@ -19,7 +19,7 @@ const Items = ({
         sortedItems.sort((a, b) => a.name.localeCompare(b.name));
         break;
       case 'price':
-        sortedItems.sort((a, b) => a.price - b.price);
+        sortedItems.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
         break;
     }
     return sortedItems;

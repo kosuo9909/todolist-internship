@@ -59,16 +59,17 @@ describe('Items.js component', () => {
       />
     );
 
-    fireEvent.change(getByLabelText('Sort By'), { target: { value: 'Price' } });
+    fireEvent.change(getByLabelText('Sort By'), { target: { value: 'price' } });
     await waitFor(() => {
 
 
         const itemElements = getAllByTestId(/item-/);
         
-        expect(itemElements[0]).toHaveTextContent('Item 3');
-        expect(itemElements[1]).toHaveTextContent('Item 1');
-        expect(itemElements[2]).toHaveTextContent('Item 2');
-    })
+        expect(itemElements[0].querySelector('.name-span').textContent.trim()).toEqual('Item 3');
+        expect(itemElements[1].querySelector('.name-span').textContent.trim()).toEqual('Item 1');
+        expect(itemElements[2].querySelector('.name-span').textContent.trim()).toEqual('Item 2');
+        
+    });
     
   });
 });
