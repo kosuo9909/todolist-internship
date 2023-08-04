@@ -1,27 +1,39 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 
+const getLocalStorageAccessors = () => {
+  const getItem = (key) => {
+    const storedValue = localStorage.getItem(key);
+    return storedValue ? JSON.parse(storedValue) : [];
+  };
+
+  const setItem = (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  return { getItem, setItem };
+};
+const getSessionStorageAccessors = () => {
+  const getItem = (key) => {
+    const storedValue = sessionStorage.getItem(key);
+        return storedValue ? JSON.parse(storedValue) : [];
+  }; 
+
+  const setItem = (key, value) => {
+    sessionStorage.setItem(key, JSON.stringify(value));
+  };
+
+  return {getItem, setItem};
+};
+
 const useTodoList = (storageType) => {
   const createStorage = (type) => {
+    
     switch (type) {
       case 'local':
-        return {
-          getItem: (key) => {
-            const storedValue = localStorage.getItem(key);
-            return storedValue ? JSON.parse(storedValue) : [];
-          },
-          setItem: (key, value) =>
-            localStorage.setItem(key, JSON.stringify(value)),
-        };
+        return getLocalStorageAccessors();
       case 'session':
-        return {
-          getItem: (key) => {
-            const storedValue = sessionStorage.getItem(key);
-            return storedValue ? JSON.parse(storedValue) : [];
-          },
-          setItem: (key, value) =>
-            sessionStorage.setItem(key, JSON.stringify(value)),
-        };
+        return getSessionStorageAccessors();
       case 'server':
         break;
       default:
