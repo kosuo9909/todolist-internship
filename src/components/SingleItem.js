@@ -9,35 +9,37 @@ const SingleItem = ({
   decreaseQuantityHandler,
   markAsDoneHandler
 }) => {
-  const [isItemCompleted, setIsItemCompleted] = useState(false);
 
   return (
     <div data-testid={`item-${item.id}`} key={keyv2}>
-      <label className='checkbox'>
+      <label className="checkbox">
         <input
-          onClick={() =>
-            markAsDoneHandler(item)
-          }
-          type='checkbox'
+          onClick={() => markAsDoneHandler(item)}
+          type="checkbox"
           checked={item.checked}
+          aria-label={`Mark ${item.name} as ${item.checked ? 'not done' : 'done'}`}
         ></input>
-        <span>Mark as done</span>
+        <span>Mark as {item.checked ? 'not done' : 'done'}</span>
       </label>
-      <div className='items-row'>
-        <div className={`items-entries ${isItemCompleted && 'line-through'}`}>
-          Name:<span className='name-span'> {item.name} </span>
-          Quantity: <span className='quantity-span'>{item.quantity}</span>
-          Price:<span className='price-span'> ${item.price}</span>
+      <div className="items-row">
+        <div className={`items-entries ${item.checked && 'line-through'}`}>
+          Name:
+          <span className="name-span">
+            {item.name}
+          </span>
+          Quantity: <span className="quantity-span">{item.quantity}</span>
+          Price:<span className="price-span"> ${item.price}</span>
           Total Price:
-          <span className='total-price-span'>
+          <span className="total-price-span">
             {' '}
             ${(item.quantity * item.price).toFixed(2)}
           </span>
         </div>
-        <div className='button-wrapper'>
-          {!isItemCompleted && (
+        <div className="button-wrapper">
+          {!item.checked && (
             <button
-              className='button-quantity'
+              className="button-quantity"
+              aria-label={`Increase ${item.name} Quantity`}
               onClick={() => {
                 increaseQuantityHandler(item);
               }}
@@ -45,9 +47,10 @@ const SingleItem = ({
               Increase Quantity
             </button>
           )}
-          {item.quantity > 1 && !isItemCompleted && (
+          {item.quantity > 1 && !item.checked && (
             <button
-              className='button-quantity'
+              className="button-quantity"
+              aria-label={`Decrease ${item.name} Quantity`}
               onClick={() => {
                 decreaseQuantityHandler(item);
               }}
@@ -55,12 +58,13 @@ const SingleItem = ({
               Decrease Quantity
             </button>
           )}
-          {isItemCompleted && (
+          {item.checked && (
             <button
-              className='button-quantity'
+              className="button-quantity"
+              aria-label={`Delete ${item.name} from the list`}
+
               onClick={() => {
                 removeItemHandler(item);
-                setIsItemCompleted(false);
               }}
             >
               Delete Item

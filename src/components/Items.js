@@ -35,7 +35,7 @@ const Items = ({
   return (
     <div className='items-header'>
       <label className='sort-by' htmlFor='cars'>
-        Sort By
+        Sort Items By
         <select id='cars' onChange={(e) => setSort(e.target.value)}>
           <option value='name'>Name</option>
           <option value='price'>Price</option>
