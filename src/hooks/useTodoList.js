@@ -49,6 +49,18 @@ const useTodoList = (storageType) => {
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
+  const markAsDoneHandler = (itemToBeFound) => {
+    const updatedItems = items.map((item) => {
+      if (item.id === itemToBeFound.id) {
+          return { ...item, checked: !item.checked };
+      }
+      return item;
+    });
+    console.log('called with' + itemToBeFound );
+    setItems(updatedItems);
+
+  };
+
   useEffect(() => {
     storage.setItem('items', items);
   }, [items]);
@@ -89,6 +101,7 @@ const useTodoList = (storageType) => {
     removeItemHandler,
     increaseQuantityHandler,
     addItemHandler,
+    markAsDoneHandler
   };
 };
 

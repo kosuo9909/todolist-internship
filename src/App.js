@@ -11,16 +11,18 @@ function App() {
     removeItemHandler,
     increaseQuantityHandler,
     addItemHandler,
+    markAsDoneHandler
   } = useTodoList('local');
 
   return (
-    <div className='app-header'>
+    <div className="app-header">
       <Input addItemHandler={addItemHandler} />
       <Items
         items={items}
         removeItemHandler={removeItemHandler}
         increaseQuantityHandler={increaseQuantityHandler}
         decreaseQuantityHandler={decreaseQuantityHandler}
+        markAsDoneHandler={markAsDoneHandler}
       />
     </div>
   );

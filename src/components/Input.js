@@ -13,7 +13,7 @@ const Input = ({ addItemHandler }) => {
     }
   };
   const addItemAndClearInput = () => {
-    addItemHandler({ name, price, quantity: 1, id: v4() });
+    addItemHandler({ name, price, quantity: 1, checked: false, id: v4() });
     setName('');
     setPrice('');
   };

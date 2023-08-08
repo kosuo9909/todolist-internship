@@ -9,6 +9,7 @@ const Items = ({
   increaseQuantityHandler,
   decreaseQuantityHandler,
   removeItemHandler,
+  markAsDoneHandler
 }) => {
   const [sort, setSort] = useState('');
 
@@ -51,6 +52,7 @@ const Items = ({
             increaseQuantityHandler={increaseQuantityHandler}
             removeItemHandler={removeItemHandler}
             decreaseQuantityHandler={decreaseQuantityHandler}
+            markAsDoneHandler={markAsDoneHandler}
           />
         ))}
       </div>

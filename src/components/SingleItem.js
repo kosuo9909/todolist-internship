@@ -7,6 +7,7 @@ const SingleItem = ({
   increaseQuantityHandler,
   removeItemHandler,
   decreaseQuantityHandler,
+  markAsDoneHandler
 }) => {
   const [isItemCompleted, setIsItemCompleted] = useState(false);
 
@@ -15,10 +16,10 @@ const SingleItem = ({
       <label className='checkbox'>
         <input
           onClick={() =>
-            setIsItemCompleted((prevIsItemCompleted) => !isItemCompleted)
+            markAsDoneHandler(item)
           }
           type='checkbox'
-          checked={isItemCompleted}
+          checked={item.checked}
         ></input>
         <span>Mark as done</span>
       </label>
