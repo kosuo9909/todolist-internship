@@ -24,13 +24,13 @@ const SingleItem = ({
       <div className="items-row">
         <div className={`items-entries ${item.checked && 'line-through'}`}>
           Name:
-          <span className="name-span">
+          <span className="font-weight-bold">
             {item.name}
           </span>
-          Quantity: <span className="quantity-span">{item.quantity}</span>
-          Price:<span className="price-span"> ${item.price}</span>
+          Quantity: <span className="font-weight-bold">{item.quantity}</span>
+          Price:<span className="font-weight-bold"> ${item.price}</span>
           Total Price:
-          <span className="total-price-span">
+          <span className="font-weight-bold">
             {' '}
             ${(item.quantity * item.price).toFixed(2)}
           </span>

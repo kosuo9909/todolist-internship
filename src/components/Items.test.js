@@ -39,13 +39,13 @@ describe('Items.js component', () => {
       />
     );
 
-    fireEvent.change(getByLabelText('Sort By'), { target: { value: 'Name' } });
+    fireEvent.change(getByLabelText('Sort Items By'), { target: { value: 'Name' } });
 
     const itemElements = getAllByTestId(/item-/);
 
-    expect(itemElements[0]).toHaveTextContent('Item 1');
-    expect(itemElements[1]).toHaveTextContent('Item 2');
-    expect(itemElements[2]).toHaveTextContent('Item 3');
+    expect(itemElements[0]).toHaveTextContent(mockItems[0].name);
+    expect(itemElements[1]).toHaveTextContent(mockItems[1].name);
+    expect(itemElements[2]).toHaveTextContent(mockItems[2].name);
   });
   it('sorts items by Price', async () => {
     const { getAllByTestId, getByLabelText } = render(
@@ -57,19 +57,19 @@ describe('Items.js component', () => {
       />
     );
 
-    fireEvent.change(getByLabelText('Sort By'), { target: { value: 'price' } });
+    fireEvent.change(getByLabelText('Sort Items By'), { target: { value: 'price' } });
     await waitFor(() => {
       const itemElements = getAllByTestId(/item-/);
 
       expect(
-        itemElements[0].querySelector('.name-span').textContent.trim()
-      ).toEqual('Item 3');
+        itemElements[0].querySelector('.font-weight-bold').textContent.trim()
+      ).toEqual(mockItems[2].name);
       expect(
-        itemElements[1].querySelector('.name-span').textContent.trim()
-      ).toEqual('Item 1');
+        itemElements[1].querySelector('.font-weight-bold').textContent.trim()
+      ).toEqual(mockItems[0].name);
       expect(
-        itemElements[2].querySelector('.name-span').textContent.trim()
-      ).toEqual('Item 2');
+        itemElements[2].querySelector('.font-weight-bold').textContent.trim()
+      ).toEqual(mockItems[1].name);
     });
   });
 
