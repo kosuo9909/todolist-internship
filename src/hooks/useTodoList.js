@@ -52,13 +52,11 @@ const useTodoList = (storageType) => {
   const markAsDoneHandler = (itemToBeFound) => {
     const updatedItems = items.map((item) => {
       if (item.id === itemToBeFound.id) {
-          return { ...item, checked: !item.checked };
+        return { ...item, checked: !item.checked };
       }
       return item;
     });
-    console.log('called with' + itemToBeFound );
     setItems(updatedItems);
-
   };
 
   useEffect(() => {
